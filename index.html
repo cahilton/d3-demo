@@ -37,7 +37,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html">Home Sweet Home</a></li>
+                <li class="active"><a href="#hello">The Beginning</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -46,8 +46,36 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>!</h1>
-        <p class="lead"></p>
+        <h1 id="hello">Well, hello!</h1>
+        <p class="lead">
+            <a href="http://d3js.org/">D3.js</a> is a data visualization library for the web. It makes use of SVG
+            to quickly and beautifully render JSON or CSV data. This is a very basic introduction into D3. There's much more out
+            in the world. So, hopefully, this just wets your appetite for D3. Most of the data visualization you see on the web
+            is probably written in D3.
+        </p>
+        <iframe src="http://bl.ocks.org/mbostock/raw/3231298/" width="1000" height="550"></iframe>
+        <p class="lead">
+            You can do <a href="https://github.com/mbostock/d3/wiki/Gallery">really cool stuff with D3</a>. We're just not there yet....
+        </p>
+    </div>
+
+    <div class="the-rest row">
+        <h3 id="svg">SVG</h3>
+        <p class="lead">
+            SVG stands for Scalable Vector Graphics. It's basically a 2D graphics format described in an XML format. When HTML5
+            came around, SVG could be directly used in web browsers. The benefit to SVG is you can resize them to any size,
+            and you don't lose any of those crisp edges, that you would get with say, a .jpeg.
+        </p>
+    </div>
+
+    <div class="the-rest row">
+        <h3 id="nitty">The Nit and the Grit</h3>
+        <p class="lead">
+            D3 requires you know HTML, CSS, Javascript fairly well, and it has a pretty steep learning curve. I'm still learning, too!
+            I'm not super-D3-hero-expert yet, but I can give you a basic intro. D3 isn't just charts. It can do lots of things, probably
+            things we can't even imagine. I can be simply described as bring data to life.
+            Oh, and it doesn't work with older, crappy browsers.
+        </p>
     </div>
 
 
@@ -59,5 +87,6 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </body>
 </html>
