@@ -264,7 +264,10 @@
                         .attr('width', function(d) {
                             // just use our data point
                             return d.value * 100;
-                        });
+                        })
+                        .append("svg:title") // creates a tooltip
+                        .text(function(d) { return d.value; });
+
                 </code>
             </pre>
         <button onclick="simpleBarChart('bar-chart-lives-here'); return false;" class="btn btn-primary">Run this code</button>
@@ -292,7 +295,7 @@
                         .text(function(d) {return d.age});
                 </code>
             </pre>
-        <button onclick="simpleBarChartWithText(); return false;" class="btn btn-primary">Run this code</button>
+        <button onclick="simpleBarChartWithText('bar-chart-with-text-lives-here'); return false;" class="btn btn-primary">Run this code</button>
 
         <div id="bar-chart-with-text-lives-here" style="padding-top:30px"></div>
     </div>
@@ -412,13 +415,16 @@
                     console.log(d);
                     // just use our data point
                     return d.value * 100; // make it a little bigger
-                });
+                })
+                .append("svg:title")
+                .text(function(d) { return d.value; });
+
         return svg;
     }
 
-    function simpleBarChartWithText() {
+    function simpleBarChartWithText(id) {
         // create a simple bar chart w/o text
-        var svg = simpleBarChart('bar-chart-with-text-lives-here');
+        var svg = simpleBarChart(id);
 
         // create a group for our text
         var barLabelGroup = svg.append("g");
@@ -429,6 +435,8 @@
                 .attr("x",3)
                 .attr("y", function(d, i) {return (i) * barSpacing + barHeight*(2/3)})
                 .text(function(d) {return d.age});
+
+        return svg;
     }
 
 </script>
