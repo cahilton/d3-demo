@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <base target="_blank">
+
     <title>D3 Demo</title>
 
     <!-- Bootstrap core CSS -->
@@ -33,12 +35,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">D3.js Demo</a>
+            <a class="navbar-brand" href="#" target="_self">D3.js Demo</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#hello">The Beginning</a></li>
-                <li><a href="#fin">Fin</a></li>
+                <li><a href="#hello" target="_self">The Beginning</a></li>
+                <li><a href="#docstuff" target="_self">Examples</a></li>
+                <li><a href="#start" target="_self">Starting Off</a></li>
+                <li><a href="#select" target="_self">Selections</a></li>
+                <li><a href="#data-joins" target="_self">Data-Joins</a></li>
+                <li><a href="#bar-chart" target="_self">Simple Bar Chart</a></li>
+                <li><a href="#fin" target="_self">Fin</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -55,7 +62,7 @@
             in the world. So, hopefully, this just wets your appetite for D3. Most of the data visualization you see on the web
             is probably written in D3.
         </p>
-        <iframe src="//player.vimeo.com/video/29862153" width="1000" height="550" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/29862153">D3 Show Reel</a> from <a href="http://vimeo.com/mbostock">Mike Bostock</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+        <iframe src="//player.vimeo.com/video/29862153" width="1000" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/29862153">D3 Show Reel</a> from <a href="http://vimeo.com/mbostock">Mike Bostock</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
         <p class="lead">
             That was a little intro to D3 from one of its creators, Mike Bostock.
         </p>
@@ -70,7 +77,7 @@
         <p class="lead">
             SVG stands for Scalable Vector Graphics. It's basically a 2D graphics format described in an XML format. When HTML5
             came around, SVG could be directly used in web browsers. The benefit to SVG is you can resize them to any size,
-            and you don't lose any of those crisp edges, that you would get with say, a .jpeg.
+            and you don't lose any of those crisp edges, that you would get with say, a .jpeg. <a href="monkey.svg">Sample SVG.</a>
         </p>
     </div>
 
@@ -78,10 +85,216 @@
         <h3 id="nitty">The Nit and the Grit</h3>
         <p class="lead">
             D3 requires you know HTML, CSS, Javascript fairly well, and it has a pretty steep learning curve. I'm still learning, too!
-            I'm not super-D3-hero-expert yet, but I can give you a basic intro. D3 isn't just charts. It can do lots of things, probably
-            things we can't even imagine. I can be simply described as bring data to life.
+            I'm not super-D3-hero-expert yet, but I can give you a basic intro. D3 isn't just charts. It's not a charting library.
+            There's no 'barchart()' function. You have to generate rectangles from your data, to make a bar chart.
+            It can do lots of things, probably
+            things we can't even imagine. It can be simply described as bring data to life.
             Oh, and it doesn't work with older, crappy browsers.
         </p>
+    </div>
+
+    <div class="the-rest row">
+        <h3 id="docstuff">Doc and Examples</h3>
+        <p class="lead">There's lots of great documentation on how to use
+        D3, but one of the best ways to learn is through examples. Of course,
+        the <a href="http://d3js.org">D3 home page</a> is one of your best resources, but
+        one of the greatest troves of D3 examples lives under one its creators, the
+            the aforementioned Mike Bostock. <a href="http://bl.ocks.org/mbostock">
+                Check it out. Seriously.
+            </a>
+        </p>
+    </div>
+
+    <div class="the-rest row">
+        <h3 id="start">Get started</h3>
+        <p class="lead">
+            Things you need.
+            <ul>
+                <li>A good text editor. Right now, I'm using WebStorm, but you can also use Sublime or Notepad++ or any other flavor of text editor you like.</li>
+                <li>A good browser. I like Chrome.</li>
+                <li>D3.js in your html include, <a href="http://d3js.org/d3.v3.min.js">http://d3js.org/d3.v3.min.js</a></li>
+                <li>A local web server.*</li>
+            </ul>
+            <label>* </label>In the examples I show here, I'll just keep it simple, but if you have
+            more complex data, you'll want to serve it up in an external JSON or CSV file, or
+            you'll want to call some sort of web service. You can do that locally with <a href="https://docs.python.org/2/library/simplehttpserver.html">Python</a>,
+            <a href="https://docs.python.org/2/library/simplehttpserver.html">Node</a> or if you're building a Java app, you'll probably already have a Tomcat/Jetty server
+            and aren't too concerned about this step. WebStorm does that for you, so it's super handy.
+        </p>
+    </div>
+
+    <div class="the-rest row">
+        <h3 id="select">Selections</h3>
+        <p class="lead">
+            Selections get you access to elements in the DOM, so D3 can do stuff to them. You can
+            think of them similar to jQuery selectors, and they look something like:
+            <pre>
+                <code>
+                 d3.select('#select-first'); // element with id select-first
+                 d3.selectAll('p'); // selects all paragraphs
+                 d3.selectAll('.banana'); // select all elements with class banana
+                 </code>
+            </pre>
+
+        </p>
+        <p class="lead">
+            Like a lot of js libraries, D3 uses chaining. It's super convenient when you're making lots
+            of changes to elements (like you will in D3).
+
+            <div>
+                <svg width="500px" height="40px">
+                    <circle id="select-first" r="20" cx="50" cy="20" fill="pink"/>
+                </svg>
+            </div>
+            <pre>
+                <code>
+                    var circ = d3.select('#select-first'); // element with id select-first
+
+                    circ.attr("fill", "red") // make the fill red
+                        .attr("r", 10) // make the radius 10
+                        .attr("stroke", "black") // make it black stroke
+                        .attr("stroke-width", 2); // make the stroke width 2 and end the statment
+                </code>
+            </pre>
+            <button onclick="colorCircle(); return false;" class="btn btn-primary">Run this code</button>
+        </p>
+
+        <p class="lead">Usually, you want to add new stuff using D3, for that, use <span class="code">append()</span></p>
+        <pre>
+                <code>
+                    var p = d3.select('#add-stuff-here'); // element with id add-stuff-here
+
+                    p.append('svg') // add the svg element
+                        .attr('width', 500)
+                        .attr('height', 40)
+                    .append('circle')
+                        .attr('fill', 'blue') // the fill
+                        .attr('r', 10) // radius
+                        .attr('cx', 50) // center x-coordinate
+                        .attr('cy', 20); // center y-coordinate
+                </code>
+            </pre>
+        <button onclick="addStuff(); return false;" class="btn btn-primary">Run this code</button>
+        <p class="lead" id="add-stuff-here">
+
+        </p>
+    </div>
+
+    <div class="the-rest row">
+        <h3 id="data-joins">Data-Joins</h3>
+        <p class="lead">The stuff D3 is made of. You need the data, right? Of course, my horse!
+        This is how you bind data to the DOM to create elements. You do this with the
+            <span class="code">datum()</span> for a single svg element or
+            <span class="code">data()</span> for a group of svg elements.</p>
+        <pre>
+                <code>
+                    var div = d3.select('#data-binds-here'); // element with id data-binds-here
+
+                    var svg = div.append('svg') // add the svg element
+                    .attr('width', 200)
+                    .attr('height', 200)
+
+                    var circ = svg.append('circle')
+                    .attr('fill', 'green') // fill
+                    .attr('cx', 100) // center x-coordinate
+                    .attr('cy', 100); // center y-coordinate
+
+                    circ.datum(40); // set datum
+
+                    // bind the radius to the datum using an anonymous function with variable d
+                    circ.attr('r', function(d) { return d; });
+                </code>
+            </pre>
+        <button onclick="bindData(); return false;" class="btn btn-primary">Run this code</button>
+        <p id="data-binds-here">
+            
+        </p>
+    </div>
+
+    <div class="the-rest row">
+        <h3 id="bar-chart">Create a simple bar chart</h3>
+        <p class="lead">
+            Ahhhhhh! The stuff of dreams. This is the real D3 deal!
+        </p>
+           <pre>
+                <code>
+                    // create a bar chart based on this population data
+                    var popData = [
+                        {age:"80 and up", value:1.6, position:0},
+                        {age:"75 - 79", value:1.5, position:1},
+                        {age:"70 - 74", value:2.1, position:2},
+                        {age:"65 - 69", value:2.6, position:3},
+                        {age:"60 - 64", value:3.4, position:4},
+                        {age:"55 - 59", value:4.5, position:5},
+                        {age:"50 - 54", value:5.1, position:6},
+                        {age:"45 - 49", value:6.0, position:7},
+                        {age:"40 - 44", value:6.6, position:8},
+                        {age:"35 - 39", value:7.1, position:9},
+                        {age:"30 - 34", value:7.3, position:10},
+                        {age:"25 - 29", value:8.1, position:11},
+                        {age:"20 - 24", value:8.9, position:12},
+                        {age:"15 - 19", value:8.8, position:13},
+                        {age:"10 - 14", value:8.6, position:14},
+                        {age:"5 - 9", value:8.8, position:15},
+                        {age:"0 - 4", value:9.3, position:16}
+                    ];
+
+                    // log it
+                    console.log(popData);
+
+                    // create the svg
+                    var svg = d3.select("#bar-chart-lives-here")
+                        .append("svg");
+                    var barGroup = svg.append("g")  // "g" are svg elements bound together
+                        .attr("class", "bar")
+                        .attr("fill", "white");
+
+                    barGroup.selectAll("rect")
+                        .data(popData)
+                    .enter() // creates a new data node for each data point
+                        .append("rect")
+                        .attr("fill", "orange")
+                        .attr("x", 0)
+                        .attr("y", function(d, i) {
+                            // d = popData
+                            // i = the current index
+                            return i * 25;
+                        })
+                        .attr('height', '20px')
+                        .attr('width', function(d) {
+                            // just use our data point
+                            return d.value * 100;
+                        });
+                </code>
+            </pre>
+        <button onclick="simpleBarChart('bar-chart-lives-here'); return false;" class="btn btn-primary">Run this code</button>
+
+        <div id="bar-chart-lives-here" style="padding-top:30px"></div>
+
+        <p class="lead">
+            That's pretty cool. Wouldn't it be create if it had labels?
+        </p>
+           <pre>
+                <code>
+                    // create vars to make life easy
+                    var barHeight = 20;
+                    var barGap = 5;
+                    var barSpacing = barHeight + barGap;
+
+                    // create a group for our text
+                    var barLabelGroup = svg.append("g");
+
+                    barLabelGroup.selectAll("text")
+                        .data(popData)
+                        .enter().append("text")
+                        .attr("x",3)
+                         .attr("y", function(d, i) {return (i) * barSpacing + barHeight*(2/3)})
+                        .text(function(d) {return d.age});
+                </code>
+            </pre>
+        <button onclick="simpleBarChartWithText(); return false;" class="btn btn-primary">Run this code</button>
+
+        <div id="bar-chart-with-text-lives-here" style="padding-top:30px"></div>
     </div>
 
     <div class="the-rest row">
@@ -92,6 +305,9 @@
                 <li><a href="http://pinboard.in/u:rking/t:d3video/">Ritchie King's D3 links</a></li>
                 <li><a href="http://www.jasondavies.com/maps/voronoi/airports/">Voronoi of World Airports</a></li>
                 <li><a href="http://www.nytimes.com/newsgraphics/2013/09/07/director-star-chart/">Constellation of Directors</a></li>
+                <li><a href="http://www.ohdsi.org/web/achilles/index.html#/SAMPLE/dashboard">OHDSI Achilles</a></li>
+                <li><a href="https://github.com/ritchieking/d3-book">Visual Storytelling with D3</a></li>
+                <li><a href="https://github.com/okspry">Ken Spry's GitHub page (check out kenx_dashboard)</a></li>
             </ul>
         </p>
     </div>
@@ -106,5 +322,115 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+    function colorCircle() {
+        var circ = d3.select('#select-first'); // element with id select-first
+
+        circ.attr("fill", "red") // make the fill red
+                .attr("r", 10) // make the radius 10
+                .attr("stroke", "black") // make it black stroke
+                .attr("stroke-width", 2); // make the stroke width 2 and end the statment
+    }
+
+    function addStuff() {
+        var p = d3.select('#add-stuff-here'); // element with id add-stuff-here
+
+        p.append('svg') // add the svg element
+                .attr('width', 500)
+                .attr('height', 40)
+                .append('circle')
+                .attr('fill', 'blue') // the fill
+                .attr('r', 10) // radius
+                .attr('cx', 50) // center x-coordinate
+                .attr('cy', 20); // center y-coordinate
+    }
+
+    function bindData() {
+        var div = d3.select('#data-binds-here'); // element with id data-binds-here
+
+        var svg = div.append('svg') // add the svg element
+                .attr('width', 200)
+                .attr('height', 200)
+
+        var circ = svg.append('circle')
+                .attr('fill', 'green') // fill
+                .attr('cx', 100) // center x-coordinate
+                .attr('cy', 100); // center y-coordinate
+
+        circ.datum(40); // set datum
+
+        // bind the radius to the datum using an anonymous function with variable d
+        circ.attr('r', function(d) { return d; });
+    }
+
+    var popData = [
+        {age:"80 and up", value:1.6, position:0},
+        {age:"75 - 79", value:1.5, position:1},
+        {age:"70 - 74", value:2.1, position:2},
+        {age:"65 - 69", value:2.6, position:3},
+        {age:"60 - 64", value:3.4, position:4},
+        {age:"55 - 59", value:4.5, position:5},
+        {age:"50 - 54", value:5.1, position:6},
+        {age:"45 - 49", value:6.0, position:7},
+        {age:"40 - 44", value:6.6, position:8},
+        {age:"35 - 39", value:7.1, position:9},
+        {age:"30 - 34", value:7.3, position:10},
+        {age:"25 - 29", value:8.1, position:11},
+        {age:"20 - 24", value:8.9, position:12},
+        {age:"15 - 19", value:8.8, position:13},
+        {age:"10 - 14", value:8.6, position:14},
+        {age:"5 - 9", value:8.8, position:15},
+        {age:"0 - 4", value:9.3, position:16}
+    ];
+
+    console.log(popData);
+
+    var barHeight = 20;
+    var barGap = 5;
+    var barSpacing = barHeight + barGap;
+
+    function simpleBarChart(id) {
+        var svg = d3.select("#" + id)
+                .append("svg");
+        var barGroup = svg.append("g")  // "g" are svg elements bound together
+                .attr("class", "bar")
+                .attr("fill", "white");
+
+        barGroup.selectAll("rect")
+                .data(popData)
+                .enter()
+                .append("rect")
+                .attr("fill", "orange")
+                .attr("x", 0)
+                .attr("y", function(d, i) {
+                   // d = popData
+                   // i = the current index
+                    return i * barSpacing;
+                })
+                .attr('height', barHeight)
+                .attr('width', function(d) {
+                    console.log(d);
+                    // just use our data point
+                    return d.value * 100; // make it a little bigger
+                });
+        return svg;
+    }
+
+    function simpleBarChartWithText() {
+        // create a simple bar chart w/o text
+        var svg = simpleBarChart('bar-chart-with-text-lives-here');
+
+        // create a group for our text
+        var barLabelGroup = svg.append("g");
+
+        barLabelGroup.selectAll("text")
+                .data(popData)
+                .enter().append("text")
+                .attr("x",3)
+                .attr("y", function(d, i) {return (i) * barSpacing + barHeight*(2/3)})
+                .text(function(d) {return d.age});
+    }
+
+</script>
 </body>
 </html>

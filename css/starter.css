@@ -103,3 +103,7 @@ table {
 a {
     font-weight: bold;
 }
+
+p.lead {
+    padding-bottom: 15px;
+}
